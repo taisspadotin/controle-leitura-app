@@ -1,0 +1,2 @@
+# Aplicativo para o cadastro de livros
+- O aplicativo  permite ao usuário adicionar um novo livro a sua lista de desejos, a controlar o livro que esta lendo, e ter uma visualização de todos os livros lidos.
