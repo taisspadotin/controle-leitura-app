@@ -13,10 +13,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Drawer, Left, Container, Header, Content, Body, Title} from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-//import { Card, ListItem } from 'react-native-elements'
-//import Routes from './routes';
 
 
 class SideBar extends Component {
@@ -82,14 +78,7 @@ class SideBar extends Component {
         );
     } 
 };
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,' +
-    'Shake or press menu button for dev menu',
-});
 
-const livros = [{nome: 'Alice no país das maravilhas', autor:'Lewis Carol', url: 'www.google.com/books'}, {nome: 'Coraline e o mundo secreto', autor:'Neil Gaiman', url: 'www.google.com/books'}, {nome: 'Harry Potter', autor:'Neil Gaiman', url: 'www.google.com/books'}];
 export default class Desejo extends Component<{}> {
   componentDidMount(){
     state={};
@@ -100,9 +89,6 @@ export default class Desejo extends Component<{}> {
   openDrawer = () => {
       this.drawer._root.open()
   };    
-  detalheLivro({navigation}){
-  	this.props.navigation.navigate('Home');
-  }
   render() {
     return (
       <>
@@ -123,45 +109,6 @@ export default class Desejo extends Component<{}> {
           </Body>
         </Header>
           
-        <View style={styles.container}>
-          <ScrollView>
-
-            <View style={[styles.tituloCard, {marginTop: 20}]}>
-                <Text style={{textAlign: 'center', color:'#DCDCDC', fontWeight: '400', fontSize: 16, textTransform: 'uppercase'}}>Adicionar novo livro</Text>
-            </View>
-             <View style={[styles.card]}>
-                <Text>Título:</Text>
-                <TextInput style={[styles.input]}  placeholder="insira o título do livro"/>
-                
-                <Text style={{marginTop:10}}>Autor:</Text>
-                <TextInput style={[styles.input]}  placeholder="insira o autor do livro"/>
-
-                <Text style={{marginTop:10}}>URL:</Text>
-                <TextInput style={[styles.input]}  placeholder="URL da loja do livro"/>
-                
-                <View style={[styles.Centro]}>
-                  <TouchableOpacity style={[styles.botao]}>
-                    <Text style={[styles.textobotao]}>Adicionar</Text>
-                  </TouchableOpacity>
-                </View>  
-              </View>
-              {livros.map((row)=>
-              <TouchableOpacity key={row.nome} onPress={() => this.detalheLivro(row.nome) }>
-              <View style={{flexDirection: 'row', marginTop: 10, marginBottom:10, marginLeft: 10, marginRight:10, alignItems:'center'}}>  
-                <View style={{width: '15%', zIndex: 10, elevation: 2}}>
-                  <Image style={[styles.avatar]} source={require('../alice.jpeg')}/>
-                </View>
-                <View style={[styles.cardLivro, {width: '85%', minHeight: 120}]}>
-                  <Text style={{fontWeight: 'bold', fontSize: 18, textTransform: 'uppercase'}}>{row.nome}</Text>
-                  <Text style={{fontSize: 15}}>{row.autor}</Text>
-                  <Text style={{fontSize: 15, color: '#c76728', textDecorationLine: 'underline'}}>{row.url}</Text>
-                </View>
-              </View>
-              </TouchableOpacity>
-              )}
-            </ScrollView>  
-          </View>
-         
         </Container>
       </Drawer>
       </>
