@@ -12,13 +12,31 @@ import {
   SafeAreaView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Drawer, Left, Container, Header, Content, Body, Title} from 'native-base';
+import {Drawer, Left, Container, Header, Content, Body, Title, Right, Button} from 'native-base';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+//import { Card, ListItem } from 'react-native-elements'
+//import Routes from './routes';
 
 
 class SideBar extends Component {
-    
-    
+  andamento(){
+    this.props.navigation.navigate('Andamento');
+  }  
+  sair(){
+    this.props.navigation.navigate('Login');
+  }
+  lidos(){
+    this.props.navigation.navigate('Lidos');
+  }
+  perfil(){
+    this.props.navigation.navigate('Perfil');
+  }
+  desejo(){
+    this.props.navigation.navigate('Desejo');
+  }  
     render(){
+      const ativo = this.props.ativo;
         return (
           <View style={[ styles.container, { backgroundColor: '#1a2f58' } ]}>
             <View style={[styles.cabecalhoMenu]}>
@@ -29,7 +47,7 @@ class SideBar extends Component {
               </View>
             </View>
             
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=> this.perfil()} style={{backgroundColor: ativo === "perfil" ? '#dcdcdc20' : 'none'}}>
               <View style={[styles.blocoMenu]}>
                 <Icon name="user" size={30} color="#DCDCDC" />
                 <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
@@ -38,7 +56,7 @@ class SideBar extends Component {
               </View>
             </TouchableOpacity>
             
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=> this.desejo()} style={{backgroundColor: ativo === "desejo" ? '#dcdcdc20' : 'none'}}>
             <View style={[styles.blocoMenu]}>
               <Icon name="heart" size={30} color="#DCDCDC" />
               <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
@@ -47,16 +65,16 @@ class SideBar extends Component {
             </View>
             </TouchableOpacity>
 
-            <TouchableOpacity >
+            <TouchableOpacity  onPress={()=> this.andamento()} style={{backgroundColor: ativo === "andamento" ? '#dcdcdc20' : 'none'}}>
             <View style={[styles.blocoMenu]}>
-              <Icon name="bookmark" size={30} color="#DCDCDC" />
+              <Icon name="bookmark" size={30}  color="#DCDCDC"/>
               <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
                 Livros em andamento
               </Text>
             </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=> this.lidos()} style={{backgroundColor: ativo === "lidos" ? '#dcdcdc20' : 'none'}}>
             <View style={[styles.blocoMenu]}>
               <Icon name="book" size={30} color="#DCDCDC" />
               <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
@@ -65,9 +83,9 @@ class SideBar extends Component {
             </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
-            <View style={[styles.blocoMenu]}>
-              <Icon name="sign-out" size={30} color="#DCDCDC" />
+            <TouchableOpacity  onPress={()=> this.sair()}>
+            <View style={[styles.blocoMenu]} >
+              <Icon name="sign-out" size={30} color="#DCDCDC"/>
               <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
                 Sair
               </Text>
@@ -79,7 +97,8 @@ class SideBar extends Component {
     } 
 };
 
-export default class Desejo extends Component<{}> {
+const livros = [{nome: 'Alice no país das maravilhas', autor:'Lewis Carol', url: 'www.google.com/books'}, {nome: 'Coraline e o mundo secreto', autor:'Neil Gaiman', url: 'www.google.com/books'}, {nome: 'Harry Potter', autor:'Neil Gaiman', url: 'www.google.com/books'}];
+export default class Cabecalho extends Component<{}> {
   componentDidMount(){
     state={};
   }
@@ -89,26 +108,37 @@ export default class Desejo extends Component<{}> {
   openDrawer = () => {
       this.drawer._root.open()
   };    
+  detalheLivro({navigation}){
+    this.props.navigation.navigate('Detalhes');
+  }
   render() {
     return (
       <>
         <Drawer
         ref={(ref) => { this.drawer = ref; }}
-        content={<SideBar navigator={this.navigator} />}
+        content={<SideBar navigation={this.props.navigation} navigator={this.navigator} ativo={this.props.ativo}/>}
         onClose={() => this.closeDrawer()}
         >
         
         <Container>
         <Header  androidStatusBarColor="#000" style={{backgroundColor: '#13214d'}}>
-      
-          <Left style={[styles.cabecalho]}>
+         
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'space-between',  width: '100%'}}>
+            <Button transparent>
              <Icon onPress={() => this.openDrawer()} name="bars" size={30} color="#fff" />
-          </Left>
-          <Body>
-              <Text style={[styles.titulo]}>Livros para comprar</Text>
-          </Body>
+            </Button>
+
+            <Text style={[styles.titulo]}>{this.props.pagina}</Text>
+              
+           </View>
         </Header>
           
+        <View style={[styles.container, {backgroundColor: this.props.fundo !== undefined ? this.props.fundo : '#26397c'}]}>
+          <ScrollView>
+            {this.props.children}
+          </ScrollView>  
+        </View>
+         
         </Container>
       </Drawer>
       </>
@@ -120,7 +150,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: 'center',
     //alignItems: 'center',
-    backgroundColor: '#26397c',
+    backgroundColor: '#abc6eb',
   },
   cabecalhoMenu:{
     borderBottomWidth: 1,
@@ -135,6 +165,8 @@ const styles = StyleSheet.create({
   cabecalho: {
     paddingTop: 0,
     backgroundColor: '#13214d',
+    //width: '50%',
+    //backgroundColor: 'red',
   },
   avatar:{
     width:100, 
@@ -162,13 +194,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   titulo: {
-     textAlign: 'center',
      fontSize: 15,
      color: '#fff', 
-     paddingTop: 12,
      textTransform: 'uppercase',
-     marginEnd: 5,
-     paddingBottom: 10,
+     marginLeft: 'auto',
+     marginRight: 'auto',
   },
   botao: {
     backgroundColor: '#c76728',
@@ -253,6 +283,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     right: 10,
 
+  },
+  ativo:{
+    backgroundColor: '#DCDCDC20',
+    
   },
  
 });

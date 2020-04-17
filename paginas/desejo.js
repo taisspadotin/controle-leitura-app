@@ -1,130 +1,26 @@
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   TextInput,
   View, 
-  StatusBar,
   TouchableOpacity,
-  Image,
-  ScrollView,
-  SafeAreaView
+  Image
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {Drawer, Left, Container, Header, Content, Body, Title} from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-//import { Card, ListItem } from 'react-native-elements'
-//import Routes from './routes';
+//import { NavigationContainer } from '@react-navigation/native';
+//import { createStackNavigator } from '@react-navigation/stack';
+import Cabecalho from '../components/header';
 
-
-class SideBar extends Component {
-    
-    
-    render(){
-        return (
-          <View style={[ styles.container, { backgroundColor: '#1a2f58' } ]}>
-            <View style={[styles.cabecalhoMenu]}>
-              <Image style={[styles.avatar]} source={require('../avatar.png')}/>
-              <View style={{flexDirection: 'column', paddingTop: 30, paddingLeft: 10}}>
-                <Text style={{color: '#dcdcdc'}}>HELLO</Text>
-                <Text style={{color: '#dcdcdc', fontWeight: 'bold', fontSize:17}}>UserName</Text>
-              </View>
-            </View>
-            
-            <TouchableOpacity>
-              <View style={[styles.blocoMenu]}>
-                <Icon name="user" size={30} color="#DCDCDC" />
-                <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
-                  Perfil
-                </Text>
-              </View>
-            </TouchableOpacity>
-            
-            <TouchableOpacity>
-            <View style={[styles.blocoMenu]}>
-              <Icon name="heart" size={30} color="#DCDCDC" />
-              <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
-                Lista de desejos
-              </Text>
-            </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity >
-            <View style={[styles.blocoMenu]}>
-              <Icon name="bookmark" size={30} color="#DCDCDC" />
-              <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
-                Livros em andamento
-              </Text>
-            </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-            <View style={[styles.blocoMenu]}>
-              <Icon name="book" size={30} color="#DCDCDC" />
-              <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
-                Livros lidos
-              </Text>
-            </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-            <View style={[styles.blocoMenu]}>
-              <Icon name="sign-out" size={30} color="#DCDCDC" />
-              <Text style={{color: '#dcdcdc', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 20}}>
-                Sair
-              </Text>
-            </View>
-            </TouchableOpacity>
-
-          </View>
-        );
-    } 
-};
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,' +
-    'Shake or press menu button for dev menu',
-});
 
 const livros = [{nome: 'Alice no país das maravilhas', autor:'Lewis Carol', url: 'www.google.com/books'}, {nome: 'Coraline e o mundo secreto', autor:'Neil Gaiman', url: 'www.google.com/books'}, {nome: 'Harry Potter', autor:'Neil Gaiman', url: 'www.google.com/books'}];
+
 export default class Desejo extends Component<{}> {
-  componentDidMount(){
-    state={};
-  }
-  closeDrawer = () => {
-      this.drawer._root.close()
-  };
-  openDrawer = () => {
-      this.drawer._root.open()
-  };    
-  detalheLivro({navigation}){
-  	this.props.navigation.navigate('Home');
+   detalheLivro({navigation}){
+  	this.props.navigation.navigate('Detalhes');
   }
   render() {
     return (
-      <>
-        <Drawer
-        ref={(ref) => { this.drawer = ref; }}
-        content={<SideBar navigator={this.navigator} />}
-        onClose={() => this.closeDrawer()}
-        >
-        
-        <Container>
-        <Header  androidStatusBarColor="#000" style={{backgroundColor: '#13214d'}}>
-      
-          <Left style={[styles.cabecalho]}>
-             <Icon onPress={() => this.openDrawer()} name="bars" size={30} color="#fff" />
-          </Left>
-          <Body>
-              <Text style={[styles.titulo]}>Livros para comprar</Text>
-          </Body>
-        </Header>
-          
-        <View style={styles.container}>
-          <ScrollView>
+      <Cabecalho navigation={this.props.navigation} pagina="Livros para comprar" ativo="desejo">
 
             <View style={[styles.tituloCard, {marginTop: 20}]}>
                 <Text style={{textAlign: 'center', color:'#DCDCDC', fontWeight: '400', fontSize: 16, textTransform: 'uppercase'}}>Adicionar novo livro</Text>
@@ -159,69 +55,20 @@ export default class Desejo extends Component<{}> {
               </View>
               </TouchableOpacity>
               )}
-            </ScrollView>  
-          </View>
-         
-        </Container>
-      </Drawer>
-      </>
+           
+      </Cabecalho>
     );
   }
 }
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    backgroundColor: '#26397c',
-  },
-  cabecalhoMenu:{
-    borderBottomWidth: 1,
-    //flex: 1,
-    flexDirection: 'row',
-    borderColor: '#dcdcdc20',
-    paddingLeft: 20,
-    paddingTop: 15,
-    paddingBottom: 20,
-    
-  },
-  cabecalho: {
-    paddingTop: 0,
-    backgroundColor: '#13214d',
-  },
   avatar:{
     width:100, 
     height:100,
     borderRadius: 50,
     borderColor: '#dcdcdc20',
     borderWidth: 1,
-  },
-  blocoMenu:{
-    paddingLeft: 20,
-    paddingTop: 15,
-    paddingBottom: 5,
-    alignItems:'center',
-    flexDirection: 'row',
-
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  titulo: {
-     textAlign: 'center',
-     fontSize: 15,
-     color: '#fff', 
-     paddingTop: 12,
-     textTransform: 'uppercase',
-     marginEnd: 5,
-     paddingBottom: 10,
   },
   botao: {
     backgroundColor: '#c76728',
@@ -294,19 +141,5 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 15,
   },
-  bolinha:{
-    backgroundColor: '#13214d',
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    //position:'absolute',
-    bottom: 0,
-    marginBottom: 10,
-    right: 10,
-
-  },
- 
 });
 
