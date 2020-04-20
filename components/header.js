@@ -38,9 +38,9 @@ class SideBar extends Component {
     render(){
       const ativo = this.props.ativo;
         return (
-          <View style={[ styles.container, { backgroundColor: '#1a2f58' } ]}>
+          <View style={[ styles.container, { backgroundColor: '#3f3d56' } ]}>
             <View style={[styles.cabecalhoMenu]}>
-              <Image style={[styles.avatar]} source={require('../avatar.png')}/>
+              <Image style={[styles.avatar]} source={require('../img/avatar.png')}/>
               <View style={{flexDirection: 'column', paddingTop: 30, paddingLeft: 10}}>
                 <Text style={{color: '#dcdcdc'}}>HELLO</Text>
                 <Text style={{color: '#dcdcdc', fontWeight: 'bold', fontSize:17}}>UserName</Text>
@@ -121,7 +121,7 @@ export default class Cabecalho extends Component<{}> {
         >
         
         <Container>
-        <Header  androidStatusBarColor="#000" style={{backgroundColor: '#13214d'}}>
+        <Header  androidStatusBarColor="#000" style={{backgroundColor: '#697e95'}}>
          
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'space-between',  width: '100%'}}>
             <Button transparent>
@@ -133,7 +133,7 @@ export default class Cabecalho extends Component<{}> {
            </View>
         </Header>
           
-        <View style={[styles.container, {backgroundColor: this.props.fundo !== undefined ? this.props.fundo : '#26397c'}]}>
+        <View style={[styles.container, {backgroundColor: this.props.fundo !== undefined ? this.props.fundo : '#697e95'}]}>
           <ScrollView>
             {this.props.children}
           </ScrollView>  
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: 'center',
     //alignItems: 'center',
-    backgroundColor: '#abc6eb',
+    backgroundColor: '#26397c',
   },
   cabecalhoMenu:{
     borderBottomWidth: 1,

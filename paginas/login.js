@@ -27,30 +27,24 @@ class Login extends Component{
   }
 	render(){
 		return(
-				<Container>
+				<Container style={{backgroundColor: '#697e95'}}>
 			    <View style={styles.container}>
-            <ImageBackground style={[styles.avatar]} source={require('../paisagem.jpg')}>
+            {/*<ImageBackground style={[styles.avatar]} source={require('../paisagem.jpg')}>*/}
              <View style={[styles.center]}>
                 
-               <View style={[styles.rodape, {backgroundColor:'#13214d', borderTopRightRadius: 5, borderTopLeftRadius: 5}]}>
-                   <Text style={{fontSize:17, color:'#fff', textTransform:'uppercase', fontWeight:'bold'}}>Login</Text>     
-               </View>
-               
-               <View style={[styles.login]}>
-                  <TextInput style={[styles.input]}  placeholder="usuario ou email"/>
+              <Image style={[styles.imagem]} source={require('../img/login.png')}/>   
+              <Text style={{color: '#efbe74', fontWeight: 'bold', fontSize: 28, marginTop: 20, marginBottom:20}}>Log In</Text>
+              <TextInput style={[styles.input]}  placeholder="usuario ou email"/>
                   <TextInput style={[styles.input]}  placeholder="senha"/>
 
                   <TouchableOpacity style={[styles.btn]} onPress={()=>this.entrar()}>
-                    <Text  style={{textTransform: 'uppercase'}}>Entrar</Text>     
+                    <Text  style={{textTransform: 'uppercase', fontWeight: 'bold', color: '#3f3d56'}}>Entrar</Text>     
                   </TouchableOpacity>
-                </View>
                 
-               <View style={[styles.rodape, {borderBottomRightRadius: 5, borderBottomLeftRadius: 5}]}>
-                   <Text>Ainda não tem uma conta? <Text style={{color: '#26397c', textDecorationLine:'underline'}} onPress={()=>this.cadastro()}>Cadastre-se</Text></Text>     
-               </View>
-              
+                   <Text style={{color: '#dcdcdc', marginTop: 15}}>Ainda não tem uma conta? <Text style={{color: '#efbe74', textDecorationLine:'underline'}} onPress={()=>this.cadastro()}>Cadastre-se</Text></Text>     
+               
              </View>  
-           </ImageBackground>
+           {/*</ImageBackground>*/}
           </View>
         </Container>
    
@@ -69,6 +63,11 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
 
     flexDirection: "column"
+  },
+  imagem:{
+    marginTop: 40,
+    width: 260,
+    height: 200,
   },
   login: {
     backgroundColor: '#fff',
@@ -89,17 +88,18 @@ const styles = StyleSheet.create({
 
   },
   input:{
-    backgroundColor: '#fff',
+    //backgroundColor: '#ffffff20',
     marginTop: 20,
     width: '85%',
     height: 40,
     paddingVertical: 5,
     paddingHorizontal: 5,
-    borderColor: '#26397c',
+    borderColor: '#3f3d56',
     borderBottomWidth: 1,
+    color: '#fff',
   },
   btn:{
-    backgroundColor: '#eab60f',
+    backgroundColor: '#ff6584',
     marginTop: 60,
     width: '85%',
     height: 50,

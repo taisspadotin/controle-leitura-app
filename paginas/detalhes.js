@@ -20,37 +20,34 @@ class Detalhes extends Component{
 	render(){
 		return(
 				<Container>
-			    <Header  androidStatusBarColor="#000" style={{backgroundColor: '#13214d', alignItems: 'center'}}>
+			    <Header  androidStatusBarColor="#000" style={[ styles.cabecalho, {alignItems: 'center'}]}>
 			      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'space-between',  width: '100%'}}>
               <Button transparent>
                 <Icon name="arrow-left" onPress={()=>this.props.navigation.navigate('Desejo')} size={30} color="#fff" />
               </Button>
-			          
-              <Text style={[styles.titulo]}>Detalhes</Text>
 			      </View>
 			    </Header>
 			          
 			    <View style={styles.container}>
-			      <View style={styles.Centro}>
-					      <View style={styles.card}>
-					        <Icon name="ellipsis-v" style={{alignSelf: 'flex-end'}} size={20} color="#000" />
-					        <Text>Título:</Text>
+			      <View style={[styles.card, {marginTop:50}]}>
+					        {/*<Icon name="ellipsis-v" style={{alignSelf: 'flex-end'}} size={20} color="#000" />*/}
+					        
+                  <Text style={[styles.label]}>Título:</Text>
 					        <TextInput style={[styles.input]}  placeholder="insira o título do livro"/>
 				                
-				          <Text style={{marginTop:10}}>Autor:</Text>
+				          <Text style={[styles.label]}>Autor:</Text>
 				          <TextInput style={[styles.input]}  placeholder="insira o autor do livro"/>
 
-	                <Text style={{marginTop:10}}>URL:</Text>
+	                <Text style={[styles.label]}>URL:</Text>
 	                <TextInput style={[styles.input]}  placeholder="URL da loja do livro"/>
 	                
 	                <View style={[styles.Centro]}>
-	                  <TouchableOpacity style={[styles.botao]}>
+	                  <TouchableOpacity style={[styles.botao, {marginTop:40}]}>
 	                    <Text style={[styles.textobotao]}>Alterar</Text>
 	                  </TouchableOpacity>
 	                </View>  
 				              
 					      </View>
-					    </View>
 
 			  </View>
       
@@ -67,68 +64,58 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: 'center',
     //alignItems: 'center',
-    backgroundColor: '#26397c',
+    backgroundColor: '#697e95',
   },
   cabecalho: {
     paddingTop: 0,
-    backgroundColor: '#13214d',
+    backgroundColor: '#697e95',
   },
-  avatar:{
-    width:100, 
-    height:100,
-    borderRadius: 50,
-    borderColor: '#dcdcdc20',
-    borderWidth: 1,
-  },
-  titulo: {
-     fontSize: 15,
-     color: '#fff', 
-     textTransform: 'uppercase',
-     marginLeft: 'auto',
-     marginRight: 'auto',
+  label:{
+    color: '#697e95', 
+    fontSize: 16, 
+    fontWeight: 'bold',
+    marginTop: 30,
   },
   botao: {
-    backgroundColor: '#c76728',
+    backgroundColor: '#ff6584',
     width: 150,
     textAlign: 'center',
     color: '#fff',
-    borderRadius: 5,
     marginTop: 15,
     marginBottom: 5,
-    height: 40,
+    height: 50,
     width: '100%',
     textAlign:'center',
     justifyContent: 'center',
     alignItems:'center',
-
+    borderRadius: 50,
   },
   Centro: {
     justifyContent: 'center',
     alignItems:'center',
   },
-  textobotao:{
-    color: '#DCDCDC',
-    fontSize: 16,
-    textTransform: 'uppercase',
-  },
   input: {
-    backgroundColor: '#f7f7f7',
-    borderColor: '#dcdcdc',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: 5,
+    backgroundColor: '#f2f2f210',
+    borderColor: '#3f3d56',
+    borderBottomWidth: 1,
+    color: '#fff',
+    marginTop: 10,
     height: 40,
     paddingHorizontal: 15,
   },
+  textobotao:{
+    color: '#fff',
+    fontSize: 16,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
   card: {
-  	backgroundColor: '#fff',
-  	width: '90%',
-  	marginTop: 10,
-  	marginBottom: 10,
-  	borderRadius: 5,
-  	minHeight: 150,
-  	paddingHorizontal: 10,
-  	paddingVertical: 10,
+  	backgroundColor: '#f2f2f2', 
+    paddingHorizontal: 20, 
+    borderTopRightRadius: 50, 
+    borderBottomRightRadius: 50,
+    marginRight:15,
+    paddingBottom:20,
   },
  
 });
