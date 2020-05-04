@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   imagem:{
-    marginTop: 40,
+    marginTop: 50,
     width: 260,
     height: 200,
   },

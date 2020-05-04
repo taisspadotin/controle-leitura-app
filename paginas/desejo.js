@@ -5,17 +5,21 @@ import {
   TextInput,
   View, 
   TouchableOpacity,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 //import { NavigationContainer } from '@react-navigation/native';
 //import { createStackNavigator } from '@react-navigation/stack';
 import Cabecalho from '../components/header';
 import {Tabs, Tab} from 'native-base';
+import api from './api';
+
 
 const livros = [{nome: 'Alice no país das maravilhas', autor:'Lewis Carol', url: 'www.google.com/books'}, {nome: 'Coraline e o mundo secreto', autor:'Neil Gaiman', url: 'www.google.com/books'}, {nome: 'Harry Potter', autor:'Neil Gaiman', url: 'www.google.com/books'}];
 
 class Tab1 extends Component{
+  
 render(){
   return(
     <View style={{marginTop:40}}>
@@ -50,32 +54,81 @@ render(){
 }
 }
 class Tab2 extends Component{
-detalheLivro(){
+  state = {
+    registros: [],
+    paginas: 0,
+    pagina_atual: 1,
+    idSelecionado: ''
+  }  
+  
+
+  componentDidMount = async() => {
+    //const resp = await api.get('/books/all');
+    //console.log(resp);
+    /*let d = (resp.data);
+
+    //this.setState({paginas: resp.data.total_paginas});
+    const registros = [];
+    
+    d.map((row)=>{
+        registros.push({
+          id: row.id,
+          title: row.title,
+          author: row.author
+        })
+    });
+      
+    this.setState({registros: registros}) 
+    //console.log('teste');
+    console.log(registros);    */
+  }
+  
+  
+  
+  detalheLivro(){
     this.props.navigation.navigate('Detalhes');
   }
-render(){
-  return(
-    <View>
-    
-              {livros.map((row)=>
-             
-             <TouchableOpacity onPress={()=>this.detalheLivro()} key={row.nome} >
-                     <View style={[styles.Centro, {flexDirection: 'column'}]}>  
-                      <View style={[styles.cardLivro, {width: 320, minHeight: 120, flexDirection: 'row'}]}>
-                       <View style={{marginLeft: 5, width:'100%'}}> 
-                           <Text style={{fontWeight: 'bold', fontSize: 12, color:'#9f9178'}}>18/04/2020 14:20</Text>
-                           <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center',  textTransform: 'uppercase', color:'#978a6f', marginTop: 5}}>{row.nome}</Text>
-                           <Text style={{fontSize: 15, color:'#978a6f', textAlign: 'center'}}>{row.autor}</Text>
-                            
-                        </View>
-                      </View>
-                      </View>
-                    </TouchableOpacity>
-              )}
-           
-            </View>
-    )
-}
+  
+  render(){
+      const createTwoButtonAlert = () =>
+    Alert.alert(
+      "Alert Title",
+      "My Alert Msg",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+
+
+    let cards = 
+          <View>
+          {livros.map((row)=>
+                     
+                     <TouchableOpacity onPress={()=>this.detalheLivro()} key={row.nome}  onPress={createTwoButtonAlert} >
+                             <View style={[styles.Centro, {flexDirection: 'column'}]}>  
+                              <View style={[styles.cardLivro, {width: 320, minHeight: 120, flexDirection: 'row'}]}>
+                               <View style={{marginLeft: 5, width:'100%'}}> 
+                                   <Text style={{fontWeight: 'bold', fontSize: 12, color:'#9f9178'}}>18/04/2020 14:20</Text>
+                                   <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center',  textTransform: 'uppercase', color:'#978a6f', marginTop: 5}}>{row.nome}</Text>
+                                   <Text style={{fontSize: 15, color:'#978a6f', textAlign: 'center'}}>{row.autor}</Text>
+                                    
+                                </View>
+                              </View>
+                              </View>
+                            </TouchableOpacity>
+                      )}
+          </View>;
+
+    return(
+        <View>{cards}</View>
+      )
+  }
 }
 export default class Desejo extends Component<{}> {
    
